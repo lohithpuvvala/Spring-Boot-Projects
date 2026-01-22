@@ -24,7 +24,7 @@ public class CloudVendorAPIService
     }
 
     //Updates Vendor Details
-    @PutMapping
+    @PutMapping("{vendorId}")
     public String updateCloudVendorDetails(@RequestBody CloudVendor cloudVendor){
         this.cloudVendor = cloudVendor;
         return "Cloud Vendor Updated Successfully";
