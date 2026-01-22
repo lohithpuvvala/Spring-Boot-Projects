@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RestApiCrudImplementationApplication {
 	public static void main(String[] args) {
+
 		SpringApplication.run(RestApiCrudImplementationApplication.class, args);
 	}
 }
