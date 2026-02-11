@@ -5,12 +5,12 @@ import org.springframework.http.HttpStatus;
 public class CloudVendorException {
 
     private final String message;
-    private final Throwable cause;
+    private final Throwable throwable;
     private final HttpStatus httpStatus;
 
-    public CloudVendorException(String message, Throwable cause, HttpStatus httpStatus) {
+    public CloudVendorException(String message, Throwable throwable, HttpStatus httpStatus) {
         this.message = message;
-        this.cause = cause;
+        this.throwable = throwable;
         this.httpStatus = httpStatus;
     }
 
@@ -18,8 +18,8 @@ public class CloudVendorException {
         return message;
     }
 
-    public Throwable getCause() {
-        return cause;
+    public Throwable getThrowable() {
+        return throwable;
     }
 
     public HttpStatus getHttpStatus() {

@@ -1,7 +1,10 @@
 package com.lohithpuvvala.rest_api_crud_implementation.controller;
 
 import com.lohithpuvvala.rest_api_crud_implementation.model.CloudVendor;
+import com.lohithpuvvala.rest_api_crud_implementation.response.ResponseHandler;
 import com.lohithpuvvala.rest_api_crud_implementation.service.CloudVendorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +21,22 @@ public class CloudVendorController
 
     //Retrieve Cloud Vendor Details by vendorID
     @GetMapping("{vendorId}")
-    public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
-        return cloudVendorService.getCloudVendorById(vendorId);
+    public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+        return ResponseHandler.responseBuilder(
+                "Requested Vendor Details are given here",
+                HttpStatus.OK,
+                cloudVendorService.getCloudVendorById(vendorId)
+        );
     }
+
     //Retrieve All Cloud Vendor Details
     @GetMapping()
-    public List<CloudVendor> getAllCloudVendorDetails(){
-        return cloudVendorService.getAllCloudVendors();
+    public ResponseEntity<Object> getAllCloudVendorDetails(){
+        return ResponseHandler.responseBuilder(
+                "Requested Vendor Details are given here",
+                HttpStatus.OK,
+                cloudVendorService.getAllCloudVendors()
+        );
     }
 
     //Creates New Vendor Details

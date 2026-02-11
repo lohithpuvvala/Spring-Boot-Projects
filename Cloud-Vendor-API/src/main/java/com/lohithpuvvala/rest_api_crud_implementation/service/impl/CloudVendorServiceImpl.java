@@ -1,5 +1,6 @@
 package com.lohithpuvvala.rest_api_crud_implementation.service.impl;
 
+import com.lohithpuvvala.rest_api_crud_implementation.exception.CloudVendorNotFoundException;
 import com.lohithpuvvala.rest_api_crud_implementation.model.CloudVendor;
 import com.lohithpuvvala.rest_api_crud_implementation.repository.CloudVendorRepository;
 import com.lohithpuvvala.rest_api_crud_implementation.service.CloudVendorService;
@@ -36,7 +37,14 @@ public class CloudVendorServiceImpl implements CloudVendorService {
 
     @Override
     public CloudVendor getCloudVendorById(String cloudVendorId) {
+        if(cloudVendorRepository.findById(cloudVendorId).isEmpty()) {
+            throw new CloudVendorNotFoundException("Requested Cloud Vendor does not exist");
+        }
         return cloudVendorRepository.findById(cloudVendorId).get();
+    }
+
+    public List<CloudVendor> findByVendorName(String vendorName) {
+        return cloudVendorRepository.findByVendorName(vendorName);
     }
 
     @Override
