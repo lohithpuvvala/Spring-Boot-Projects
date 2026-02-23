@@ -43,7 +43,7 @@ public class CloudVendorServiceImpl implements CloudVendorService {
         return cloudVendorRepository.findById(cloudVendorId).get();
     }
 
-    public List<CloudVendor> findByVendorName(String vendorName) {
+    public List<CloudVendor> getByVendorName(String vendorName) {
         return cloudVendorRepository.findByVendorName(vendorName);
     }
 
