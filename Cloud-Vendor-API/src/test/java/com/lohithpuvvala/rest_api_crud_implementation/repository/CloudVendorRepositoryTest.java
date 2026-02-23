@@ -3,8 +3,13 @@ package com.lohithpuvvala.rest_api_crud_implementation.repository;
 import com.lohithpuvvala.rest_api_crud_implementation.model.CloudVendor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
 public class CloudVendorRepositoryTest {
@@ -29,5 +34,21 @@ public class CloudVendorRepositoryTest {
     }
 
     //Test case Success
+
+    @Test
+    void testFindByVendorName_Found(){
+        List<CloudVendor>cloudVendorList = cloudVendorRepository.findByVendorName("Amazon");
+        assertThat(cloudVendorList.get(0).getVendorId())
+                .isEqualTo(cloudVendor.getVendorId());
+        assertThat(cloudVendorList.get(0).getVendorAddress())
+                .isEqualTo(cloudVendor.getVendorAddress());
+
+    }
+
     //Test case Failure
+    @Test
+    void testFindByVendorName_NotFound(){
+        List<CloudVendor>cloudVendorList = cloudVendorRepository.findByVendorName("GCP");
+        assertThat(cloudVendorList.isEmpty()).isTrue();
+    }
 }
