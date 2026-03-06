@@ -1,10 +1,10 @@
-package com.lohithpuvvala.Online_Book_Store;
+package com.lohithpuvvala.Online_Books_Store;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OnlineBookStoreApplicationTests {
+class OnlineBooksStoreApplicationTests {
 
 	@Test
 	void contextLoads() {
