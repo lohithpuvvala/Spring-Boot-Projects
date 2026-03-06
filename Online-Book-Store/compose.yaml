@@ -1,1 +1,9 @@
-services: {}
+services:
+  mangodb:
+    image: 'mongo:latest'
+    environment:
+      - 'MONGO-INITDB-DATABASE=mydatabase'
+      - 'MONGO-INITDB-PASSWORD=secret'
+      - 'MONGO-INITDB-USERNAME=root'
+    ports:
+      - '27017'

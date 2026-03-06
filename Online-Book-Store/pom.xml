@@ -11,8 +11,8 @@
 	<groupId>com.lohithpuvvala</groupId>
 	<artifactId>Online-Books-Store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Online-Book-Store</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Online-Books-Store</name>
+	<description>Online Books Store with MongoDB</description>
 	<url/>
 	<licenses>
 		<license/>
