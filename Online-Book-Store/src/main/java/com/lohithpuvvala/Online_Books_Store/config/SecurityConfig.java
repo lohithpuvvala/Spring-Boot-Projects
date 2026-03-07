@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .password(
                         passwordEncoder().encode("1234")
                 )
+                .roles("USER")
                 .build();
 
         UserDetails userDetailsTwo = User
@@ -33,6 +34,7 @@ public class SecurityConfig {
                 .password(
                         passwordEncoder().encode("1234")
                 )
+                .roles("USER")
                 .build();
 
         UserDetails admin = User
@@ -40,6 +42,7 @@ public class SecurityConfig {
                 .password(
                         passwordEncoder().encode("1234")
                 )
+                .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(userDetailsOne, userDetailsTwo, admin);
