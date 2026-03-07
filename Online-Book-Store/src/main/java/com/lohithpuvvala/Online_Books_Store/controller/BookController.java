@@ -18,6 +18,11 @@ public class BookController {
     @Autowired
     BookService  bookService;
 
+    @GetMapping("/welcome")
+    public ResponseEntity<String> welcome(){
+        return new ResponseEntity<>("<h1>Welcome to the Book Store</h1>",HttpStatus.OK);
+    }
+
     @GetMapping("/{bookId}")
     public ResponseEntity<BookDto> getBook(@PathVariable String bookId){
         BookDto bookDto = bookService.getBook(bookId);
