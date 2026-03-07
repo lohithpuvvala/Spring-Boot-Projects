@@ -21,34 +21,36 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails userDetailsOne = User
-                .withUsername("User1")
-                .password(
-                        passwordEncoder().encode("1234")
-                )
-                .roles("USER")
-                .build();
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails userDetailsOne = User
+//                .withUsername("User1")
+//                .password(
+//                        passwordEncoder().encode("1234")
+//                )
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails userDetailsTwo = User
+//                .withUsername("User2")
+//                .password(
+//                        passwordEncoder().encode("1234")
+//                )
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User
+//                .withUsername("Admin")
+//                .password(
+//                        passwordEncoder().encode("1234")
+//                )
+//                .roles("ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(userDetailsOne, userDetailsTwo, admin);
+//    }
 
-        UserDetails userDetailsTwo = User
-                .withUsername("User2")
-                .password(
-                        passwordEncoder().encode("1234")
-                )
-                .roles("USER")
-                .build();
 
-        UserDetails admin = User
-                .withUsername("Admin")
-                .password(
-                        passwordEncoder().encode("1234")
-                )
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(userDetailsOne, userDetailsTwo, admin);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
