@@ -1,0 +1,14 @@
+package com.lohithpuvvala.Online_Books_Store.service;
+
+import com.lohithpuvvala.Online_Books_Store.dto.BookDto;
+
+import java.util.List;
+
+public interface BookService {
+
+    public BookDto getBook(String bookId);
+    public List<BookDto> getAllBooks();
+    public BookDto createBook(BookDto bookDto);
+    public BookDto updateBook(BookDto bookDto);
+    public void deleteBookByBookId(String bookId);
+}
