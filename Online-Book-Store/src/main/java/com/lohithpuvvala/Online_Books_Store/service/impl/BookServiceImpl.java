@@ -6,10 +6,12 @@ import com.lohithpuvvala.Online_Books_Store.mapper.BookMapper;
 import com.lohithpuvvala.Online_Books_Store.repository.BookRepository;
 import com.lohithpuvvala.Online_Books_Store.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class BookServiceImpl implements BookService {
 
     @Autowired

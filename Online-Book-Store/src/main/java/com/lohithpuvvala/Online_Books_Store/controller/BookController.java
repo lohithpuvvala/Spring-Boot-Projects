@@ -1,5 +1,8 @@
 package com.lohithpuvvala.Online_Books_Store.controller;
 
+import com.lohithpuvvala.Online_Books_Store.dto.BookDto;
+import com.lohithpuvvala.Online_Books_Store.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.support.SimpleTriggerContext;
@@ -12,33 +15,36 @@ import java.util.List;
 @RequestMapping("/book-store")
 public class BookController {
 
+    @Autowired
+    BookService  bookService;
+
     @GetMapping("/{bookId}")
-    public ResponseEntity<String> getBook(@PathVariable String bookId){
-        return new ResponseEntity<>("Book Found " + bookId, HttpStatus.OK);
+    public ResponseEntity<BookDto> getBook(@PathVariable String bookId){
+        BookDto bookDto = bookService.getBook(bookId);
+        return new ResponseEntity<>(bookDto, HttpStatus.OK);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<String>> getAllBooks(){
-        List<String> books = new ArrayList();
-        books.add("Java book");
-        books.add("Python book");
-        books.add("C# book");
-        books.add("C++ book");
-        return new ResponseEntity<>(books, HttpStatus.OK);
+    public ResponseEntity<List<BookDto>> getAllBooks(){
+        List<BookDto> bookDtoList = bookService.getAllBooks();
+        return new ResponseEntity<>(bookDtoList, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> createBook(String book){
-        return new ResponseEntity<>("Book Created", HttpStatus.OK);
+    public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto){
+        BookDto CreateBookDto = bookService.createBook(bookDto);
+        return new ResponseEntity<>(CreateBookDto, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<String> updateBook(String book){
-        return new ResponseEntity<>("Book Updated Succesfully: ", HttpStatus.OK);
+    public ResponseEntity<BookDto> updateBook(BookDto bookDto){
+        BookDto updateBookDto = bookService.updateBookName(bookDto);
+        return new ResponseEntity<>(updateBookDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{bookId}")
     public ResponseEntity<String> deleteBook(@PathVariable String bookId){
+        bookService.deleteBookByBookId(bookId);
         return new ResponseEntity<>("Book Deleted Successfully: "+bookId, HttpStatus.OK);
     }
 }

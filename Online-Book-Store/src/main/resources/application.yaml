@@ -1,4 +1,7 @@
 spring:
   application:
     name: Online-Book-Store
-
+  security:
+    user:
+      name: testUser
+      password: Pass1
