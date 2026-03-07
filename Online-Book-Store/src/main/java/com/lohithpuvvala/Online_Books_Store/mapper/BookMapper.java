@@ -16,7 +16,7 @@ public class BookMapper {
         return bookDto;
     }
 
-    public static Book toBook(BookDto bookDto){
+    public static Book toEntity(BookDto bookDto){
         Book book = new Book(
                     bookDto.bookId(),
                     bookDto.name(),
