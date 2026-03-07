@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.support.SimpleTriggerContext;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,30 +25,35 @@ public class BookController {
     }
 
     @GetMapping("/{bookId}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<BookDto> getBook(@PathVariable String bookId){
         BookDto bookDto = bookService.getBook(bookId);
         return new ResponseEntity<>(bookDto, HttpStatus.OK);
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<BookDto>> getAllBooks(){
         List<BookDto> bookDtoList = bookService.getAllBooks();
         return new ResponseEntity<>(bookDtoList, HttpStatus.OK);
     }
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto){
         BookDto CreateBookDto = bookService.createBook(bookDto);
         return new ResponseEntity<>(CreateBookDto, HttpStatus.OK);
     }
 
     @PutMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BookDto> updateBook(BookDto bookDto){
         BookDto updateBookDto = bookService.updateBookName(bookDto);
         return new ResponseEntity<>(updateBookDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{bookId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteBook(@PathVariable String bookId){
         bookService.deleteBookByBookId(bookId);
         return new ResponseEntity<>("Book Deleted Successfully: "+bookId, HttpStatus.OK);
