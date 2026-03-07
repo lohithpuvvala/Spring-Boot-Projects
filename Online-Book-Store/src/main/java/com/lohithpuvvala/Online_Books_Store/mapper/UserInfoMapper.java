@@ -4,7 +4,7 @@ import com.lohithpuvvala.Online_Books_Store.dto.UserInfoDto;
 import com.lohithpuvvala.Online_Books_Store.entity.UserInfo;
 
 public class UserInfoMapper {
-    public UserInfoDto toDto(UserInfo userInfo){
+    public static UserInfoDto toDto(UserInfo userInfo){
         return new UserInfoDto(
                 userInfo.getUsername(),
                 userInfo.getPassword(),
@@ -12,7 +12,7 @@ public class UserInfoMapper {
         );
     }
 
-    public UserInfo toEntity(UserInfoDto userInfoDto){
+    public static UserInfo toEntity(UserInfoDto userInfoDto){
         return new UserInfo(
                 userInfoDto.username(),
                 userInfoDto.password(),
