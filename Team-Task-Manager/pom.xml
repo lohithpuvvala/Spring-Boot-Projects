@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.0.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.lohithpuvvala</groupId>
+	<artifactId>Team-Task-Manager</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Team-Task-Manager</name>
+	<description>The Secure Team Task Manager is a full-stack web application designed to help teams manage projects and tasks in a secure and organized way. The system allows users to register, log in, and manage tasks within different projects while ensuring secure access using JWT-based authentication and role-based authorization.  The application follows a RESTful architecture using Spring Boot, where the backend handles authentication, business logic, and database operations, while the frontend interacts with the APIs to provide a simple task management interface.  Users authenticate using their credentials, and upon successful login, the system generates a JSON Web Token (JWT) which acts as a secure digital access key. This token is sent with each request and verified by the Spring Security filter chain, ensuring that only authenticated users can access protected resources.  The system supports role-based access control, where different roles such as Admin, Manager, and User have different permissions. For example, administrators can manage projects and users, managers can assign tasks, and regular users can view and update tasks assigned to them.  The application allows teams to create projects, assign tasks to users, track task status, and monitor progress. Tasks include details such as title, description, assigned user, status, and due date. The backend uses Spring Data JPA to manage database operations and maintain relationships between users, projects, and tasks.  Additionally, the system can include background features such as scheduled reminders for overdue tasks using Spring Scheduler and event-driven actions using Spring Event Listeners to maintain loose coupling between components.  This project demonstrates key backend concepts such as Spring Boot REST APIs, JWT authentication, Spring Security, dependency injection, database relationships with JPA/Hibernate, and role-based authorization, making it a practical example of a secure enterprise-style application.</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>25</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
