@@ -4,7 +4,10 @@ import com.lohithpuvvala.Team_Task_Manager.dto.CompressedTaskDto;
 import com.lohithpuvvala.Team_Task_Manager.mapper.TaskMapper;
 import com.lohithpuvvala.Team_Task_Manager.model.Task;
 import com.lohithpuvvala.Team_Task_Manager.service.TaskService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,33 +21,34 @@ public class TaskController {
     private final TaskMapper taskMapper = new TaskMapper();
 
     @PostMapping("/tasks")
-    public Task createTask(@RequestBody CompressedTaskDto compressedTaskDto) {
-        return taskService.createTask(compressedTaskDto);
+    public ResponseEntity<Task> createTask(@RequestBody CompressedTaskDto compressedTaskDto) {
+        return new ResponseEntity<>(taskService.createTask(compressedTaskDto),
+                HttpStatus.CREATED);
     }
 
     @GetMapping("/tasks")
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTasks() {
+        return new ResponseEntity<>(taskService.getAllTasks(),  HttpStatus.OK);
     }
 
     @GetMapping("/tasks/{id}")
-    public Task getTaskById(@PathVariable Integer id) {
+    public ResponseEntity<CompressedTaskDto> getTaskById(@PathVariable Integer id) {
         Task task = taskService.getTaskById(id);
         if(task == null){
             throw new RuntimeException("Controller Layer: Task with id " + id + " not found");
         }
-        return task;
+        return new ResponseEntity<>(taskMapper.toCompressedTaskDto(task), HttpStatus.OK);
     }
 
     @PutMapping("/tasks/{id}")
-    public String updateTask(@PathVariable Integer id, @RequestBody CompressedTaskDto compressedTaskDto) {
+    public ResponseEntity<String> updateTask(@PathVariable Integer id, @RequestBody CompressedTaskDto compressedTaskDto) {
         taskService.updateTaskById(id,compressedTaskDto);
-        return "Task updated";
+        return new ResponseEntity<>("Task updated", HttpStatus.OK);
     }
 
     @DeleteMapping("/tasks/{id}")
-    public String deleteTaskById(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteTaskById(@PathVariable Integer id) {
         taskService.deleteTaskById(id);
-        return "Task deleted";
+        return new ResponseEntity<>("Task deleted", HttpStatus.OK);
     }
 }
