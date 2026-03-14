@@ -1,7 +1,12 @@
 package com.lohithpuvvala.Team_Task_Manager.mapper;
 
 import com.lohithpuvvala.Team_Task_Manager.dto.CompressedTaskDto;
+import com.lohithpuvvala.Team_Task_Manager.dto.ViewTaskDto;
 import com.lohithpuvvala.Team_Task_Manager.model.Task;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskMapper {
     public CompressedTaskDto toCompressedTaskDto(Task task) {
@@ -10,5 +15,17 @@ public class TaskMapper {
 
     public Task CompressedTasktoEntity(CompressedTaskDto compressedTaskDto, Integer id) {
         return new  Task(id, compressedTaskDto.getTitle(), compressedTaskDto.getDescription());
+    }
+
+    public ViewTaskDto toViewTaskDto(Task task) {
+        return new ViewTaskDto(task);
+    }
+
+    public List<ViewTaskDto> toViewTaskDto(List<Task> tasks) {
+        List<ViewTaskDto> viewTaskDtos = new ArrayList<>();
+        for (Task task : tasks) {
+            viewTaskDtos.add(toViewTaskDto(task));
+        }
+        return viewTaskDtos;
     }
 }
