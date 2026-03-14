@@ -31,8 +31,8 @@ public class TaskMapper {
     public Task toEntity(ViewTaskDto viewTaskDto) {
         return new Task(
                 viewTaskDto.getId(),
-                viewTaskDto.getCompressedTaskDto().getTitle(),
-                viewTaskDto.getCompressedTaskDto().getDescription()
+                viewTaskDto.getDetails().getTitle(),
+                viewTaskDto.getDetails().getDescription()
         );
     }
 }

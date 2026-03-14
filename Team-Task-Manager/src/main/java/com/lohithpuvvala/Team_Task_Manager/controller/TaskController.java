@@ -1,6 +1,7 @@
 package com.lohithpuvvala.Team_Task_Manager.controller;
 
 import com.lohithpuvvala.Team_Task_Manager.dto.CompressedTaskDto;
+import com.lohithpuvvala.Team_Task_Manager.dto.ViewTaskDto;
 import com.lohithpuvvala.Team_Task_Manager.mapper.TaskMapper;
 import com.lohithpuvvala.Team_Task_Manager.model.Task;
 import com.lohithpuvvala.Team_Task_Manager.service.TaskService;
@@ -21,23 +22,24 @@ public class TaskController {
     private final TaskMapper taskMapper = new TaskMapper();
 
     @PostMapping("/tasks")
-    public ResponseEntity<Task> createTask(@RequestBody CompressedTaskDto compressedTaskDto) {
-        return new ResponseEntity<>(taskService.createTask(compressedTaskDto),
-                HttpStatus.CREATED);
+    public ResponseEntity<ViewTaskDto> createTask(@RequestBody CompressedTaskDto compressedTaskDto) {
+        Task task = taskService.createTask(compressedTaskDto);
+        return new ResponseEntity<>(taskMapper.toViewTaskDto(task),HttpStatus.CREATED);
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<List<Task>> getAllTasks() {
-        return new ResponseEntity<>(taskService.getAllTasks(),  HttpStatus.OK);
+    public ResponseEntity<List<ViewTaskDto>> getAllTasks() {
+        List<Task> tasks = taskService.getAllTasks();
+        return new ResponseEntity<>(taskMapper.toViewTaskDto(tasks),  HttpStatus.OK);
     }
 
     @GetMapping("/tasks/{id}")
-    public ResponseEntity<CompressedTaskDto> getTaskById(@PathVariable Integer id) {
+    public ResponseEntity<ViewTaskDto> getTaskById(@PathVariable Integer id) {
         Task task = taskService.getTaskById(id);
         if(task == null){
             throw new RuntimeException("Controller Layer: Task with id " + id + " not found");
         }
-        return new ResponseEntity<>(taskMapper.toCompressedTaskDto(task), HttpStatus.OK);
+        return new ResponseEntity<>(taskMapper.toViewTaskDto(task), HttpStatus.OK);
     }
 
     @PutMapping("/tasks/{id}")

@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ViewTaskDto {
     private Integer id;
-    private CompressedTaskDto compressedTaskDto;
+    private CompressedTaskDto details;
 
     public ViewTaskDto(Task task) {
         this.id = task.getId();
-        this.compressedTaskDto.setTitle(task.getTitle());
-        this.compressedTaskDto.setDescription(task.getDescription());
+        this.details.setTitle(task.getTitle());
+        this.details.setDescription(task.getDescription());
     }
 }
