@@ -3,7 +3,6 @@ package com.lohithpuvvala.Team_Task_Manager.mapper;
 import com.lohithpuvvala.Team_Task_Manager.dto.CompressedTaskDto;
 import com.lohithpuvvala.Team_Task_Manager.dto.ViewTaskDto;
 import com.lohithpuvvala.Team_Task_Manager.model.Task;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +26,13 @@ public class TaskMapper {
             viewTaskDtos.add(toViewTaskDto(task));
         }
         return viewTaskDtos;
+    }
+
+    public Task toEntity(ViewTaskDto viewTaskDto) {
+        return new Task(
+                viewTaskDto.getId(),
+                viewTaskDto.getCompressedTaskDto().getTitle(),
+                viewTaskDto.getCompressedTaskDto().getDescription()
+        );
     }
 }
