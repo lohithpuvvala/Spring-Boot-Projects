@@ -36,9 +36,6 @@ public class TaskController {
     @GetMapping("/tasks/{id}")
     public ResponseEntity<ViewTaskDto> getTaskById(@PathVariable Integer id) {
         Task task = taskService.getTaskById(id);
-        if(task == null){
-            throw new RuntimeException("Controller Layer: Task with id " + id + " not found");
-        }
         return new ResponseEntity<>(taskMapper.toViewTaskDto(task), HttpStatus.OK);
     }
 
