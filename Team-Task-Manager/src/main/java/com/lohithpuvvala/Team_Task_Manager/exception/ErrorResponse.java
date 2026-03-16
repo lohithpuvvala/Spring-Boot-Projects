@@ -1,6 +1,5 @@
 package com.lohithpuvvala.Team_Task_Manager.exception;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
