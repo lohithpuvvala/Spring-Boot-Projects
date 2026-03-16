@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ViewTaskDto {
     private Integer id;
-    private CompressedTaskDto details;
+    private CompressedTaskDto details = new CompressedTaskDto();
 
     public ViewTaskDto(Task task) {
         this.id = task.getId();

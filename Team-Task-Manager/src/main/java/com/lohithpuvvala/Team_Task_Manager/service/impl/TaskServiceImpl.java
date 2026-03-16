@@ -1,6 +1,7 @@
 package com.lohithpuvvala.Team_Task_Manager.service.impl;
 
 import com.lohithpuvvala.Team_Task_Manager.dto.CompressedTaskDto;
+import com.lohithpuvvala.Team_Task_Manager.exception.TaskNotFoundException;
 import com.lohithpuvvala.Team_Task_Manager.mapper.TaskMapper;
 import com.lohithpuvvala.Team_Task_Manager.model.Task;
 import com.lohithpuvvala.Team_Task_Manager.repository.TaskRepository;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -33,8 +33,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task getTaskById(Integer id) {
-        Optional<Task> task = taskRepository.findById(id);
-        return task.orElse(null);
+        return taskRepository.findById(id).orElseThrow(
+                () -> new TaskNotFoundException("Task with id: " + id + " not found")
+        );
     }
 
     @Override
@@ -44,22 +45,18 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void updateTaskById(Integer id, CompressedTaskDto compressedTaskDto){
-        Optional<Task> task = taskRepository.findById(id);
-        if(task.isPresent()) {
-            Task updatedTask = taskMapper.CompressedTasktoEntity(compressedTaskDto,id);
-            taskRepository.save(updatedTask);
-        }else{
-            throw new RuntimeException("Service Layer: Task with id " + id + " not found");
+        if(!taskRepository.existsById(id)){
+            throw new TaskNotFoundException("Task with id: " + id + " not found");
         }
+        Task updatedTask = taskMapper.CompressedTasktoEntity(compressedTaskDto,id);
+        taskRepository.save(updatedTask);
     }
 
     @Override
     public void deleteTaskById(Integer id) {
-        Optional<Task> task = taskRepository.findById(id);
-        if(task.isPresent()) {
-            taskRepository.delete(task.get());
-        }else{
-            throw new RuntimeException("Service Layer: Task with id " + id + " not found");
-        }
+        Task task = taskRepository.findById(id).orElseThrow(
+                () -> new TaskNotFoundException("Task with id: " + id + " not found")
+        );
+        taskRepository.delete(task);
     }
 }
