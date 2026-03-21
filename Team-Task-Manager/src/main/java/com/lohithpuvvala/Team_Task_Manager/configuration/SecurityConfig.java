@@ -18,31 +18,31 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity //triggers the role based access wherever applicable
+@EnableMethodSecurity//triggers the role based access wherever applicable
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user1 = User.builder()
-                .username("user1")
-                .password(passwordEncoder().encode("1234"))
-                .roles("USER")
-                .build();
-
-        UserDetails user2 = User.builder()
-                .username("user2")
-                .password(passwordEncoder().encode("1234"))
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("1234"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user1, user2, admin);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user1 = User.builder()
+//                .username("user1")
+//                .password(passwordEncoder().encode("1234"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails user2 = User.builder()
+//                .username("user2")
+//                .password(passwordEncoder().encode("1234"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("1234"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user1, user2, admin);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
