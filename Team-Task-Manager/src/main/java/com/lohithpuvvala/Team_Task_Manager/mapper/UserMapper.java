@@ -8,7 +8,7 @@ public class UserMapper {
         return new UserDto(user.getUsername(), user.getPassword(), user.getRoles());
     }
 
-    public static User userDtoToUser(UserDto userDto) {
+    public static User toEntity(UserDto userDto) {
         return new User(userDto.username(), userDto.password(), userDto.roles());
     }
 }
