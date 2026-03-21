@@ -4,6 +4,7 @@ package com.lohithpuvvala.Team_Task_Manager.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity //triggers the role based access wherever applicable
 public class SecurityConfig {
 
     @Bean
@@ -24,11 +26,13 @@ public class SecurityConfig {
         UserDetails user1 = User.builder()
                 .username("user1")
                 .password(passwordEncoder().encode("1234"))
+                .roles("USER")
                 .build();
 
         UserDetails user2 = User.builder()
                 .username("user2")
                 .password(passwordEncoder().encode("1234"))
+                .roles("USER")
                 .build();
 
         UserDetails admin = User.builder()

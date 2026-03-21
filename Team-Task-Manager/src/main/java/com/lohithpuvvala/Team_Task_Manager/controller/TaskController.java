@@ -9,6 +9,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,30 +23,35 @@ public class TaskController {
     private final TaskMapper taskMapper = new TaskMapper();
 
     @PostMapping("/tasks")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ViewTaskDto> createTask(@RequestBody CompressedTaskDto compressedTaskDto) {
         Task task = taskService.createTask(compressedTaskDto);
         return new ResponseEntity<>(taskMapper.toViewTaskDto(task),HttpStatus.CREATED);
     }
 
     @GetMapping("/tasks")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<ViewTaskDto>> getAllTasks() {
         List<Task> tasks = taskService.getAllTasks();
         return new ResponseEntity<>(taskMapper.toViewTaskDto(tasks),  HttpStatus.OK);
     }
 
     @GetMapping("/tasks/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ViewTaskDto> getTaskById(@PathVariable Integer id) {
         Task task = taskService.getTaskById(id);
         return new ResponseEntity<>(taskMapper.toViewTaskDto(task), HttpStatus.OK);
     }
 
     @PutMapping("/tasks/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> updateTask(@PathVariable Integer id, @RequestBody CompressedTaskDto compressedTaskDto) {
         taskService.updateTaskById(id,compressedTaskDto);
         return new ResponseEntity<>("Task updated", HttpStatus.OK);
     }
 
     @DeleteMapping("/tasks/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteTaskById(@PathVariable Integer id) {
         taskService.deleteTaskById(id);
         return new ResponseEntity<>("Task deleted", HttpStatus.OK);
